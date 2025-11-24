@@ -14,15 +14,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    overflow: hidden; 
+    /* Alteração principal: 100vh garante que o body use a altura total da tela */
+    min-height: 100vh; 
+    height: 100vh; /* Adicionado para garantir o preenchimento total */
+    overflow: auto; /* Permite rolagem apenas se o conteúdo exceder a tela */
 }
 
 .container {
     background: rgba(0, 0, 0, 0.85);
-    padding: 60px 80px;
+    /* Reduzido o padding padrão */
+    padding: 40px 50px; 
     border-radius: 20px;
     text-align: center;
+    /* Uso de max-width e width mantido, mas será ajustado pelo media query */
     max-width: 80%;
     width: 1000px;
     box-sizing: border-box;
@@ -31,14 +35,16 @@ body {
     
     
     box-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.5),   
-        0 0 30px #003cffe1,   
-        0 15px 25px #003cffe1;        
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 30px #003cffe1, 
+        0 15px 25px #003cffe1; 
+    /* Adicionado flex-shrink para garantir que encolha se necessário */
+    flex-shrink: 1; 
 }
 
 h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2.8em; /* ESTA É A LINHA QUE VAMOS MUDAR */
+    font-size: 2.8em; 
     margin-bottom: 30px;
     color: #02c1fb; 
     text-shadow: 0 0 20px #003cffe1, 0 0 25px #25e9f3b3; 
@@ -71,7 +77,7 @@ input[type="number"] {
 input[type="number"]:focus {
     outline: none;
     background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* Sombra neon vermelha/laranja */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); 
 }
 
 .hint {
@@ -93,7 +99,7 @@ input[type="number"]:focus {
 }
 
 #draw-button {
-    background: linear-gradient(45deg, #f94f00d5, #0055ffdd); /* Laranja/Vermelho para Azul Neon */
+    background: linear-gradient(45deg, #f94f00d5, #0055ffdd); 
     color: #fff;
     border: none;
     padding: 15px 40px;
@@ -127,10 +133,11 @@ input[type="number"]:focus {
 }
 
 .number-slot {
-    width: 120px;
+    /* Usaremos unidades relativas à tela no media query landscape */
+    width: 120px; 
     height: 150px;
-    background-color: #0000009d; /* Fundo um pouco mais transparente */
-    border: 1px solid #fc6214; /* Borda laranja neon (da logo) */
+    background-color: #0000009d; 
+    border: 1px solid #fc6214; 
     border-radius: 15px;
     margin: 0 20px;
     display: flex;
@@ -138,8 +145,8 @@ input[type="number"]:focus {
     align-items: center;
     font-family: 'Orbitron', sans-serif;
     font-size: 6em;
-    color: #ff4d00; /* Azul neon para o número */
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); /* Sombra neon vermelha */
+    color: #ff4d00; 
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); 
     overflow: hidden;
     position: relative;
     transition: transform 0.3s ease-out;
@@ -159,13 +166,13 @@ input[type="number"]:focus {
     margin-top: 40px;
     font-size: 2.5em;
     font-weight: 700;
-    color: #fddb2e; /* Dourado para destaque final, mas você pode usar azul/vermelho neon */
+    color: #fddb2e; 
     text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     min-height: 1.5em;
 }
-.result span { /* Cor do número vencedor no resultado */
-    color: #ff5100; /* Azul neon para o número vencedor */
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500; /* Duplo neon */
+.result span { 
+    color: #ff5100; 
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500; 
 }
 
 
@@ -180,7 +187,7 @@ input[type="number"]:focus {
     z-index: 9999;
 }
 
-/* Responsividade Básica */
+/* 1. Responsividade Básica (Portrait - Largura máxima de 768px) */
 @media (max-width: 768px) {
     .container {
         padding: 30px;
@@ -193,6 +200,7 @@ input[type="number"]:focus {
         width: 90px;
         height: 120px;
         font-size: 3.5em;
+        margin: 0 10px; /* Reduzindo a margem horizontal */
     }
     #draw-button {
         padding: 12px 30px;
@@ -200,5 +208,58 @@ input[type="number"]:focus {
     }
     .result {
         font-size: 1.5em;
+    }
+}
+
+/* 2. RESPONSIVIDADE PARA CELULAR DEITADO (Landscape/Paisagem) */
+/* Quando a altura da tela é menor que a largura, típico do modo paisagem em celular */
+@media (max-height: 450px) and (orientation: landscape) {
+    /* Garante que o container use uma porção menor da tela para caber na altura */
+    .container {
+        padding: 10px 20px; /* Reduzido muito o padding */
+        max-width: 98vw;
+    }
+    
+    h1 {
+        font-size: 1.2em; /* Reduzido drasticamente para caber */
+        margin-bottom: 10px;
+    }
+
+    .input-section {
+        margin-bottom: 10px;
+    }
+    
+    label {
+        font-size: 0.9em;
+        margin-bottom: 3px;
+    }
+
+    input[type="number"] {
+        padding: 5px;
+        font-size: 1em;
+    }
+
+    #draw-button {
+        padding: 8px 20px;
+        font-size: 1em;
+        margin-top: 5px;
+    }
+
+    .draw-display {
+        margin-top: 15px;
+    }
+
+    /* Redução drástica da caixa do número para caber na tela deitada */
+    .number-slot {
+        width: 50px; 
+        height: 70px;
+        font-size: 2.5em; /* Reduzido o tamanho da fonte */
+        margin: 0 5px;
+    }
+
+    .result {
+        margin-top: 15px;
+        font-size: 1em;
+        min-height: 0.5em;
     }
 }
