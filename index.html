@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥂 SORTEIO NG FEST 2025 🥂</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🥂 SORTEIO NG FEST 2025 🥂</h1>
+        
+        <div class="input-section">
+            <label for="total-numeros">Total de Participantes:</label>
+            <input type="number" id="total-numeros" value="150" min="1" max="999">
+        </div>
+
+        <div id="secret-winner-section" class="input-section hidden">
+            <label for="secret-winner">Vencedor Pré-Definido:</label>
+            <input type="number" id="secret-winner" placeholder="Deixe em branco para aleatório">
+            <span class="hint">Pressione 'V' para alternar a visibilidade</span>
+        </div>
+
+        <button id="draw-button">SORTEAR AGORA!</button>
+
+        <div class="draw-display">
+            <div class="number-slot" id="hundreds-slot"><span>?</span></div>
+            <div class="number-slot" id="tens-slot"><span>?</span></div>
+            <div class="number-slot" id="units-slot"><span>?</span></div>
+        </div>
+
+        <div id="result-message" class="result"></div>
+    </div>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
